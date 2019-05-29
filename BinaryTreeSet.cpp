@@ -101,6 +101,7 @@ bool equal(Node* node1, Node* node2) {
 		&& equal(node1->left, node2->left)
 		&& equal(node1->right, node2->right);
 }
+
 // Function that deletes a tree
 void deleteTree(Node* &node) {
 	if (node == NULL)
@@ -121,17 +122,25 @@ void printNode(Node* node) {
 void printLevel(Node* node, int level) {
 }
 
+int soNutNhanh(Node* node) {
+	if (node == NULL) return 0;
+	else if (node->left == NULL && node->right == NULL)
+		return 0;
+	else return soNutNhanh(node->left)
+			+ soNutNhanh(node->right) + 1;
+}
+
 int main() {
 	struct Node *root = NULL;
-	//			   8
-	//		   6/     \11
-	//		  2/ 	 9/
-	//			\4
+	//			  	 8
+	//		    6/         \11
+	//		  2/  \7	 9/
+	//	       \4
 	root = insertNode(root, 8);
 	
 	insertNode(root, 2);
 	insertNode(root, 6);
-	
+	insertNode(root, 7);
 	insertNode(root, 4);
 	insertNode(root, 11);
 	insertNode(root, 9);
@@ -148,7 +157,7 @@ int main() {
 	printAllNodes(root);
 	printf("\nCac gia tri phan tu cay nhi phan PRE-ORDER: ");
 	printAllNodesPreOrder(root);
-		
+	printf("\nSo nut nhanh: %d", soNutNhanh(root));
 	deleteTree(root);
 	printf("\nDa xoa cay nhi phan!!");
 	
